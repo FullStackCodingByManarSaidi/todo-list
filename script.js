@@ -174,3 +174,14 @@ filterButtons.forEach(function(button) {
 /* 9. Afficher les tâches au démarrage */
 
 displayTasks();
+
+const clearCompletedButton = document.getElementById("clearCompleted");
+
+clearCompletedButton.addEventListener("click", function () {
+    tasks = tasks.filter(function (task) {
+        return !task.completed;
+    });
+
+    saveTasks();
+    displayTasks();
+});
