@@ -1,0 +1,149 @@
+
+/* Réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Conteneur principal */
+.container {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* En-tête */
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #777;
+}
+
+/* Formulaire */
+#taskForm {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    min-width: 0;
+}
+
+#taskForm button {
+    padding: 12px 20px;
+    border: none;
+    background: #667eea;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#taskForm button:hover {
+    background: #5266d5;
+}
+
+/* Filtres */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 15px;
+    border: 1px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+/* Liste des tâches */
+#taskList {
+    list-style: none;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #f7f7f7;
+    border-radius: 8px;
+}
+
+.task span {
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+
+.task.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.task button {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: #ff5252;
+    color: white;
+}
+
+#taskCount {
+    margin-top: 20px;
+    text-align: center;
+    color: #777;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    #taskForm {
+        flex-direction: column;
+    }
+}
