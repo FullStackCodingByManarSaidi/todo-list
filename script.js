@@ -7,6 +7,7 @@ const taskList = document.getElementById("taskList");
 const taskCount = document.getElementById("taskCount");
 
 const filterButtons = document.querySelectorAll(".filter-btn");
+const clearCompletedButton = document.getElementById("clearCompleted");
 
 /* 2. Initialiser les tâches */
 
@@ -23,6 +24,7 @@ function saveTasks() {
 /* 4. Afficher les tâches */
 
 function displayTasks() {
+
     taskList.innerHTML = "";
 
     const filteredTasks = tasks.filter(function(task) {
@@ -55,6 +57,7 @@ function displayTasks() {
         /* Bouton terminer */
 
         const completeButton = document.createElement("button");
+
         completeButton.textContent = task.completed
             ? "Annuler"
             : "Terminer";
@@ -63,9 +66,20 @@ function displayTasks() {
             toggleTask(task.id);
         });
 
+        /* Bouton modifier */
+
+        const editButton = document.createElement("button");
+
+        editButton.textContent = "Modifier";
+
+        editButton.addEventListener("click", function() {
+            editTask(task.id);
+        });
+
         /* Bouton supprimer */
 
         const deleteButton = document.createElement("button");
+
         deleteButton.textContent = "Supprimer";
         deleteButton.classList.add("delete-btn");
 
@@ -77,6 +91,7 @@ function displayTasks() {
 
         li.appendChild(span);
         li.appendChild(completeButton);
+        li.appendChild(editButton);
         li.appendChild(deleteButton);
 
         taskList.appendChild(li);
@@ -141,7 +156,46 @@ function toggleTask(id) {
     displayTasks();
 }
 
-/* 7. Supprimer une tâche */
+/* 7. Modifier une tâche */
+
+function editTask(id) {
+
+    const task = tasks.find(function(task) {
+        return task.id === id;
+    });
+
+    if (!task) {
+        return;
+    }
+
+    const newText = prompt("Modifier votre tâche :", task.text);
+
+    if (newText === null) {
+        return;
+    }
+
+    if (newText.trim() === "") {
+        alert("La tâche ne peut pas être vide !");
+        return;
+    }
+
+    tasks = tasks.map(function(task) {
+
+        if (task.id === id) {
+            return {
+                ...task,
+                text: newText.trim()
+            };
+        }
+
+        return task;
+    });
+
+    saveTasks();
+    displayTasks();
+}
+
+/* 8. Supprimer une tâche */
 
 function deleteTask(id) {
 
@@ -153,7 +207,7 @@ function deleteTask(id) {
     displayTasks();
 }
 
-/* 8. Filtrer les tâches */
+/* 9. Filtrer les tâches */
 
 filterButtons.forEach(function(button) {
 
@@ -171,17 +225,18 @@ filterButtons.forEach(function(button) {
     });
 });
 
-/* 9. Afficher les tâches au démarrage */
+/* 10. Supprimer les tâches terminées */
 
-displayTasks();
+clearCompletedButton.addEventListener("click", function() {
 
-const clearCompletedButton = document.getElementById("clearCompleted");
-
-clearCompletedButton.addEventListener("click", function () {
-    tasks = tasks.filter(function (task) {
+    tasks = tasks.filter(function(task) {
         return !task.completed;
     });
 
     saveTasks();
     displayTasks();
 });
+
+/* 11. Afficher les tâches au démarrage */
+
+displayTasks();
